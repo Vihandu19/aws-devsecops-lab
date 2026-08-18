@@ -31,10 +31,22 @@ module "network" {
   }
 }
 
+
 module "compute" {
   source = "../../modules/compute"
 
   name_prefix                = local.name_prefix
   private_subnets            = module.network.private_subnets
   instance_security_group_id = module.network.instance_security_group_id
+}
+
+
+module "alb" {
+  source = "../../modules/alb"
+
+  name_prefix           = local.name_prefix
+  vpc_id                = module.network.vpc_id
+  public_subnet_ids     = module.network.public_subnet_ids
+  alb_security_group_id = module.network.alb_security_group_id
+  instance_ids          = module.compute.instance_ids
 }

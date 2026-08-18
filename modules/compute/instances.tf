@@ -4,6 +4,8 @@ data "aws_ssm_parameter" "al2023" {
 
 
 resource "aws_instance" "ec2" {
+  #checkov:skip=CKV_AWS_126:Detailed monitoring not needed for a cost-controlled lab
+  #checkov:skip=CKV_AWS_135:t4g.nano does not support EBS optimization
   for_each = var.private_subnets
 
   ami                    = data.aws_ssm_parameter.al2023.value
@@ -15,6 +17,10 @@ resource "aws_instance" "ec2" {
   metadata_options {
     http_tokens   = "required"
     http_endpoint = "enabled"
+  }
+  
+  root_block_device {
+    encrypted = true
   }
 
   user_data = <<-EOF

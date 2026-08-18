@@ -1,4 +1,10 @@
 #Security groups
+
+# Default security group locked 
+resource "aws_default_security_group" "default" {
+  vpc_id      = aws_vpc.vpc.id
+}
+
 data "aws_prefix_list" "s3" {
   prefix_list_id = aws_vpc_endpoint.s3.prefix_list_id
 }
@@ -52,6 +58,7 @@ resource "aws_security_group" "endpoints" {
 #ALB rules 
 
 resource "aws_vpc_security_group_ingress_rule" "alb_http" {
+  #checkov:skip=CKV_AWS_260:Public ALB must accept HTTP from internet by design
   security_group_id = aws_security_group.alb.id
   description       = "HTTP from internet"
   cidr_ipv4         = "0.0.0.0/0"
@@ -81,6 +88,7 @@ resource "aws_vpc_security_group_egress_rule" "alb_to_instance" {
 #Instance rules 
 
 resource "aws_vpc_security_group_ingress_rule" "instance_from_alb" {
+  #checkov:skip=CKV_AWS_260:Sources from the ALB security group, not the internet; Checkov flags any port-80 ingress
   security_group_id            = aws_security_group.instance.id
   description                  = "HTTP from ALB"
   referenced_security_group_id = aws_security_group.alb.id

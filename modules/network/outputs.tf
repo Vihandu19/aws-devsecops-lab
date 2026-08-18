@@ -60,3 +60,9 @@ output "instance_security_group_id" {
   description = "ID of the instance-tier security group"
   value       = aws_security_group.instance.id
 }
+
+# ALB security group output
+output "alb_security_group_id" {
+  description = "ID of the ALB-tier security group"
+  value       = aws_security_group.alb.id
+}
