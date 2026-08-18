@@ -30,3 +30,11 @@ module "network" {
     }
   }
 }
+
+module "compute" {
+  source = "../../modules/compute"
+
+  name_prefix                = local.name_prefix
+  private_subnets            = module.network.private_subnets
+  instance_security_group_id = module.network.instance_security_group_id
+}

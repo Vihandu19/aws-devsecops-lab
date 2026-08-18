@@ -31,8 +31,32 @@ output "private_subnet_ids" {
   ]
 }
 
+output "public_subnets" {
+  description = "Map of public subnet name to ID"
+  value = {
+    for key, subnet in aws_subnet.subnet :
+    key => subnet.id
+    if var.subnets[key].type == "public"
+  }
+}
+
+output "private_subnets" {
+  description = "Map of private subnet name to ID"
+  value = {
+    for key, subnet in aws_subnet.subnet :
+    key => subnet.id
+    if var.subnets[key].type == "private"
+  }
+}
+
 #Endpoint outputs
 output "s3_endpoint_id" {
   description = "ID of the S3 VPC endpoint"
   value       = aws_vpc_endpoint.s3.id
+}
+
+#Security group outputs
+output "instance_security_group_id" {
+  description = "ID of the instance-tier security group"
+  value       = aws_security_group.instance.id
 }
