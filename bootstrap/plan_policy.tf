@@ -12,15 +12,15 @@ resource "aws_iam_role_policy" "plan_state" {
     Version = "2012-10-17"
     Statement = [
       {
-        Sid    = "StateBucketList"
-        Effect = "Allow"
-        Action = ["s3:ListBucket", "s3:GetBucketVersioning"]
+        Sid      = "StateBucketList"
+        Effect   = "Allow"
+        Action   = ["s3:ListBucket", "s3:GetBucketVersioning"]
         Resource = aws_s3_bucket.tfstate.arn
       },
       {
-        Sid    = "StateObjectAccess"
-        Effect = "Allow"
-        Action = ["s3:GetObject", "s3:PutObject"]
+        Sid      = "StateObjectAccess"
+        Effect   = "Allow"
+        Action   = ["s3:GetObject", "s3:PutObject"]
         Resource = "${aws_s3_bucket.tfstate.arn}/*"
       }
     ]

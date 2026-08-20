@@ -18,7 +18,7 @@ resource "aws_instance" "ec2" {
     http_tokens   = "required"
     http_endpoint = "enabled"
   }
-  
+
   root_block_device {
     encrypted = true
   }

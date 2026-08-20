@@ -25,9 +25,9 @@ resource "aws_iam_role_policy" "apply_services" {
         Resource = "arn:aws:ssm:ca-central-1::parameter/aws/service/*"
       },
       {
-        Sid    = "BudgetManagement"
-        Effect = "Allow"
-        Action = ["budgets:*"]
+        Sid      = "BudgetManagement"
+        Effect   = "Allow"
+        Action   = ["budgets:*"]
         Resource = "*"
       }
     ]
@@ -81,15 +81,15 @@ resource "aws_iam_role_policy" "apply_state" {
     Version = "2012-10-17"
     Statement = [
       {
-        Sid    = "StateBucketList"
-        Effect = "Allow"
-        Action = ["s3:ListBucket", "s3:GetBucketVersioning"]
+        Sid      = "StateBucketList"
+        Effect   = "Allow"
+        Action   = ["s3:ListBucket", "s3:GetBucketVersioning"]
         Resource = aws_s3_bucket.tfstate.arn
       },
       {
-        Sid    = "StateObjectAccess"
-        Effect = "Allow"
-        Action = ["s3:GetObject", "s3:PutObject", "s3:DeleteObject"]
+        Sid      = "StateObjectAccess"
+        Effect   = "Allow"
+        Action   = ["s3:GetObject", "s3:PutObject", "s3:DeleteObject"]
         Resource = "${aws_s3_bucket.tfstate.arn}/*"
       }
     ]

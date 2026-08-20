@@ -2,7 +2,7 @@
 
 # Default security group locked 
 resource "aws_default_security_group" "default" {
-  vpc_id      = aws_vpc.vpc.id
+  vpc_id = aws_vpc.vpc.id
 }
 
 data "aws_prefix_list" "s3" {
