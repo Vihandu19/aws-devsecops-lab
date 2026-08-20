@@ -28,7 +28,7 @@ resource "aws_iam_role" "gha_plan" {
           "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
         }
         StringLike = {
-          "token.actions.githubusercontent.com:sub" = "repo:${local.github_repo}:pull_request"
+          "token.actions.githubusercontent.com:sub" = "repo:${local.github_repo}:*"
         }
       }
     }]
