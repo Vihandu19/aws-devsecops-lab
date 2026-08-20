@@ -50,3 +50,4 @@ module "alb" {
   alb_security_group_id = module.network.alb_security_group_id
   instance_ids          = module.compute.instance_ids
 }
+
