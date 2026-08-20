@@ -8,7 +8,7 @@ resource "aws_iam_openid_connect_provider" "github" {
 }
 
 locals {
-  github_repo = "Vihandu19/aws-devsecops-lab"
+  github_repo = "Vihandu19@168481948/aws-devsecops-lab@1335240760"
 }
 
 # plan role: assumed by pull requests (read and state access only)
