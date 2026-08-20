@@ -18,9 +18,9 @@ resource "aws_iam_role_policy" "plan_state" {
         Resource = aws_s3_bucket.tfstate.arn
       },
       {
-        Sid    = "StateObjectAccess"
-        Effect = "Allow"
-        Action = ["s3:GetObject", "s3:PutObject", "s3:DeleteObject"]
+        Sid      = "StateObjectAccess"
+        Effect   = "Allow"
+        Action   = ["s3:GetObject", "s3:PutObject", "s3:DeleteObject"]
         Resource = "${aws_s3_bucket.tfstate.arn}/*"
       }
     ]
