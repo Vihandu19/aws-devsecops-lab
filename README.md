@@ -36,3 +36,6 @@ While designed as an ephemeral lab environment rather than a production workload
 
 ### 6. Sustainability
 *   **Resource Efficiency:** Because the lab targets low monthly runtime with ephemeral resources which are strictly spun up on demand. This prevents idle infrastructure from unnecessarily drawing energy.
+
+
+## Github Actions
