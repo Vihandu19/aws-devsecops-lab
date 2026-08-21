@@ -43,24 +43,9 @@ resource "aws_iam_role_policy" "apply_services" {
         Resource = "*"
       },
       {
-        Sid    = "LogBucketManagement"
-        Effect = "Allow"
-        Action = [
-          "s3:CreateBucket",
-          "s3:DeleteBucket",
-          "s3:PutBucketPolicy",
-          "s3:GetBucketPolicy",
-          "s3:DeleteBucketPolicy",
-          "s3:PutBucketPublicAccessBlock",
-          "s3:GetBucketPublicAccessBlock",
-          "s3:PutBucketTagging",
-          "s3:GetBucketTagging",
-          "s3:PutObject",
-          "s3:DeleteObject",
-          "s3:ListBucket",
-          "s3:GetBucketAcl",
-          "s3:PutBucketAcl"
-        ]
+        Sid      = "LogBucketManagement"
+        Effect   = "Allow"
+        Action   = ["s3:*"]
         Resource = [
           "arn:aws:s3:::devsecops-lab-alb-logs-*",
           "arn:aws:s3:::devsecops-lab-alb-logs-*/*"
