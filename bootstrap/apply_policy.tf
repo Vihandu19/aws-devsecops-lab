@@ -31,16 +31,40 @@ resource "aws_iam_role_policy" "apply_services" {
         Resource = "*"
       },
       {
-        Sid    = "WAF"
-        Effect = "Allow"
-        Action = ["wafv2:*"]
+        Sid      = "WAF"
+        Effect   = "Allow"
+        Action   = ["wafv2:*"]
         Resource = "*"
       },
       {
-        Sid    = "CloudWatchLogs"
-        Effect = "Allow"
-        Action = ["logs:*"]
+        Sid      = "CloudWatchLogs"
+        Effect   = "Allow"
+        Action   = ["logs:*"]
         Resource = "*"
+      },
+      {
+        Sid    = "LogBucketManagement"
+        Effect = "Allow"
+        Action = [
+          "s3:CreateBucket",
+          "s3:DeleteBucket",
+          "s3:PutBucketPolicy",
+          "s3:GetBucketPolicy",
+          "s3:DeleteBucketPolicy",
+          "s3:PutBucketPublicAccessBlock",
+          "s3:GetBucketPublicAccessBlock",
+          "s3:PutBucketTagging",
+          "s3:GetBucketTagging",
+          "s3:PutObject",
+          "s3:DeleteObject",
+          "s3:ListBucket",
+          "s3:GetBucketAcl",
+          "s3:PutBucketAcl"
+        ]
+        Resource = [
+          "arn:aws:s3:::devsecops-lab-alb-logs-*",
+          "arn:aws:s3:::devsecops-lab-alb-logs-*/*"
+        ]
       }
     ]
   })
@@ -73,6 +97,9 @@ resource "aws_iam_role_policy" "apply_iam" {
           "iam:RemoveRoleFromInstanceProfile",
           "iam:AttachRolePolicy",
           "iam:DetachRolePolicy",
+          "iam:PutRolePolicy",
+          "iam:DeleteRolePolicy",
+          "iam:GetRolePolicy",
           "iam:ListRolePolicies",
           "iam:ListAttachedRolePolicies",
           "iam:ListInstanceProfilesForRole"
@@ -88,7 +115,7 @@ resource "aws_iam_role_policy" "apply_iam" {
 
 # apply state role: read, write, delete access to the state bucket
 resource "aws_iam_role_policy" "apply_state" {
-  name = "terraform-state-access"
+  name = "terraform-apply-state"
   role = aws_iam_role.gha_apply.id
 
   policy = jsonencode({
