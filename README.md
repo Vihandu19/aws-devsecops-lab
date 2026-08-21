@@ -146,5 +146,4 @@ aws logs describe-log-groups --log-group-name-prefix "/aws/vpc/"
 aws logs describe-log-groups --log-group-name-prefix "aws-waf-logs-"
 aws s3 ls s3://devsecops-lab-alb-logs-<account-id>/ --recursive
 ```
-
 ---
