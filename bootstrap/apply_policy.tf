@@ -35,6 +35,12 @@ resource "aws_iam_role_policy" "apply_services" {
         Effect = "Allow"
         Action = ["wafv2:*"]
         Resource = "*"
+      },
+      {
+        Sid    = "CloudWatchLogs"
+        Effect = "Allow"
+        Action = ["logs:*"]
+        Resource = "*"
       }
     ]
   })

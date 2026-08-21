@@ -40,6 +40,14 @@ module "compute" {
   instance_security_group_id = module.network.instance_security_group_id
 }
 
+module "logging" {
+  source = "../../modules/logging"
+
+  name_prefix = local.name_prefix
+  vpc_id      = module.network.vpc_id
+  web_acl_arn = module.waf.web_acl_arn
+}
+
 
 module "alb" {
   source = "../../modules/alb"
@@ -49,6 +57,9 @@ module "alb" {
   public_subnet_ids     = module.network.public_subnet_ids
   alb_security_group_id = module.network.alb_security_group_id
   instance_ids          = module.compute.instance_ids
+
+  enable_access_logs = true
+  access_log_bucket  = module.logging.alb_log_bucket
 }
 
 

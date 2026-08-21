@@ -13,6 +13,14 @@ resource "aws_lb" "alb" {
 
   subnets = var.public_subnet_ids
 
+  dynamic "access_logs" {
+    for_each = var.enable_access_logs ? [1] : []
+    content {
+      bucket = var.access_log_bucket
+      enabled = true
+    }
+  }
+
   tags = {
     Name = "${var.name_prefix}-alb"
   }
