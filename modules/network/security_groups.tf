@@ -20,6 +20,7 @@ resource "aws_vpc_security_group_egress_rule" "instance_to_s3" {
 
 
 resource "aws_security_group" "alb" {
+  #checkov:skip=CKV2_AWS_5:Attached to the ALB via alb_security_group_id passed to the alb module; Checkov cannot trace attachment across module boundaries
   name_prefix = "${var.name_prefix}-alb-"
   description = "ALB tier: accepts internet traffic"
   vpc_id      = aws_vpc.vpc.id
@@ -32,6 +33,7 @@ resource "aws_security_group" "alb" {
 }
 
 resource "aws_security_group" "instance" {
+  #checkov:skip=CKV2_AWS_5:Attached to the instances via instance_security_group_id passed to the compute module; Checkov cannot trace attachment across module boundaries
   name_prefix = "${var.name_prefix}-instance-"
   description = "Instance tier: accepts traffic only from ALB"
   vpc_id      = aws_vpc.vpc.id

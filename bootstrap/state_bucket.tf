@@ -5,6 +5,10 @@ locals {
 }
 
 resource "aws_s3_bucket" "tfstate" {
+  #checkov:skip=CKV2_AWS_62:Event notifications are not needed for the state bucket
+  #checkov:skip=CKV2_AWS_61:Lifecycle configuration is not needed; the state bucket is small and long-lived by design
+  #checkov:skip=CKV_AWS_18:Access logging is not configured for this single-project lab state bucket
+  #checkov:skip=CKV_AWS_144:Cross-region replication is overkill for a personal lab state bucket
   bucket = local.state_bucket_name
 
   # This bucket holds the state for the whole project. Do not delete

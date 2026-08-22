@@ -1,4 +1,5 @@
 resource "aws_vpc" "vpc" {
+  #checkov:skip=CKV2_AWS_11:Flow logs are configured in the logging module (aws_flow_log.vpc); Checkov cannot trace this across the module boundary
   cidr_block           = var.vpc_cidr
   enable_dns_support   = true
   enable_dns_hostnames = true

@@ -1,4 +1,5 @@
 resource "aws_wafv2_web_acl" "waf" {
+    #checkov:skip=CKV2_AWS_31:Logging is configured by aws_wafv2_web_acl_logging_configuration in the logging module; Checkov cannot trace it across the module boundary
     name        = "${var.name_prefix}-web-acl"
     description = "Regional web ACL for the ALB"
     scope       = "REGIONAL"
